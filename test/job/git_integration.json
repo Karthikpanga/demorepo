@@ -1,0 +1,41 @@
+{
+  "name" : "git_integration",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::139347150628:role/service-role/AWSGlueServiceRole",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-139347150628-us-east-1/scripts/g.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-139347150628-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "false",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-139347150628-us-east-1/temporary/"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "4.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1706626408936\":{\"S3DirectTarget\":{\"Compression\":\"snappy\",\"Format\":\"csv\",\"Inputs\":[\"node-1706626404831\"],\"Name\":\"Amazon S3\",\"PartitionKeys\":[],\"Path\":\"s3://testdq\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}},\"node-1706626404831\":{\"RenameField\":{\"Inputs\":[\"node-1706626398836\"],\"Name\":\"Rename Field\",\"SourcePath\":[\"machine_id\"],\"TargetPath\":[\"m_id\"]}},\"node-1706626398836\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://primisbuc/machine catalog.csv\"},\"Escaper\":\"\",\"Exclusions\":[],\"Name\":\"Amazon S3\",\"OptimizePerformance\":false,\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"machine_id\",\"Type\":\"string\"},{\"Name\":\"machine_name\",\"Type\":\"string\"},{\"Name\":\"location\",\"Type\":\"string\"},{\"Name\":\"floor_no.\",\"Type\":\"string\"},{\"Name\":\"network_rack_no.\",\"Type\":\"string\"}]}],\"Paths\":[\"s3://primisbuc/machine catalog.csv\"],\"QuoteChar\":\"quote\",\"Recurse\":true,\"Separator\":\"comma\",\"WithHeader\":true}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "demorepo",
+    "branch" : "main",
+    "folder" : "test/job"
+  }
+}
